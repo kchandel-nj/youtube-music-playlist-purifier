@@ -1,38 +1,55 @@
 # YouTube Music Playlist Purifier 🧹
 
-A lightweight Python script utilizing `ytmusicapi` to connect securely to your YouTube Music account, scan your library playlists, and clean them by removing duplicate tracks.
+A secure, interactive Python automation pipeline utilizing `ytmusicapi` to connect directly to your YouTube Music account, scan your library catalog, and scrub selected playlists clean of duplicate entries and unavailable/dead tracks.
 
 ## ✨ Features
-* **Natively Parsed Authentication:** Safely initializes authentication directly via browser network session headers.
-* **Interactive Selection:** Displays all playlists in your library so you can pick exactly which one to scan.
-* **Duplicate Detection:** Scans your track listings and logs every duplicate instance it identifies.
-* **Dead Track Identification:** Spots unavailable or deleted tracks that no longer play.
-* **Safe Automated Purge:** Deletes duplicate tracks while preserving your original track listing intact.
+* **🔒 Env Vaulting:** Session tokens are kept out of source code using a secure local configuration context.
+* **📂 Automated Handshake Translation:** Automatically extracts raw web signatures into library-compliant profile structures.
+* **📋 Dynamic Selection Catalog:** Scans your live profile environment and provides an interactive terminal directory of your playlists.
+* **👯 Strict Duplicate Purging:** Discovers recurring tracks and safely filters them out while preserving original layout sequencing.
+* **❌ Structural Dead Track Stripping:** Captures and strips out hidden unplayable tracks or entries deleted by original owners.
 
 ## 🚀 Getting Started
 
-### 1. Prerequisites
-Ensure you have Python installed on your system. Install the required `ytmusicapi` library package:
+### 1. Installation & Environment Setup
+Install the core API library alongside the environment engine wrapper:
 ```powershell
-pip install ytmusicapi
+pip install ytmusicapi python-dotenv
 ```
 
-### 2. Setup & Authentication
-The script uses browser network headers to authenticate as your account. 
-1. Open **YouTube Music** in your browser and sign in.
-2. Press `F12` (or right-click -> **Inspect**) to open the Developer Tools.
-3. Head to the **Network** tab.
-4. Interact with the page (e.g., search for a song) to trigger traffic.
-5. Find a request named `browse` or `search`, view its **Headers** tab, and copy everything under **Request Headers**.
-6. Open `purify.py` and paste your copied text block into the `headers_raw` multi-line string variable.
+### 2. Configure Credentials (`.env`)
+1. Create a file named `.env` in the root folder of your project.
+2. Open **YouTube Music** in your browser and verify you are logged into your target profile account.
+3. Open your browser Developer Tools (`F12`), head to the **Network** tab, and filter by `browse` or `search` actions.
+4. Click on a successful request entity header item, scroll down to **Request Headers**, and copy the complete raw text layout block.
+5. Paste it inside your `.env` target variable. Ensure the full multi-line configuration block is wrapped inside double quotes:
 
-### 3. Usage
-Run the script from your terminal:
+```env
+YT_MUSIC_HEADERS="accept
+*/*
+accept-encoding
+gzip, deflate, br, zstd
+...[paste the rest of your copied header block here]..."
+```
+
+### 3. Usage Pipeline
+
+#### Step A: Build Configuration Core
+Execute the layout conversion script to extract your environment variables into an authentication state:
+```powershell
+python Setup.py
+```
+
+#### Step B: Execute Playlist Purification
+Run the primary purification utility pipeline:
 ```powershell
 python purify.py
 ```
-Follow the on-screen terminal prompts to select your target playlist and confirm the duplicate purge.
+Follow the interactive prompt directory to choose your target music collection and authorize removals.
 
-## 🛠️ Project Structure
-* `purify.py` - Core script containing header conversion, library connectivity, scanning algorithms, and the automated removal pipeline.
-* `browser.json` - Generated automatically on execution to house structured authentication states.
+## ⚠️ Repository Protection
+To prevent secret personal cookies from leaking into public repository records, create a `.gitignore` file mapping these parameters:
+```text
+.env
+browser.json
+```
