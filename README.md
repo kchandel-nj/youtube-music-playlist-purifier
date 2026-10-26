@@ -37,7 +37,7 @@ gzip, deflate, br, zstd
 #### Step A: Build Configuration Core
 Execute the layout conversion script to extract your environment variables into an authentication state:
 ```powershell
-python Setup.py
+python setup.py
 ```
 
 #### Step B: Execute Playlist Purification
